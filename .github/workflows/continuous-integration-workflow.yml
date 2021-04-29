@@ -15,7 +15,7 @@ jobs:
       run: dotnet build
     
     - name: Install npm
-      uses: kogoe1/DevOps-Course-Workshop-Module-07-Learners
+      # uses: kogoe1/DevOps-Course-Workshop-Module-07-Learners
       working-directory: DotnetTemplate.Web
       run: npm install
       run:  npm run build 
