@@ -14,12 +14,12 @@ pipeline {
                 }
             }
             steps {
-                sh 'dotnet build'
+                sh 'dotnet build && dotnet test'
             }
             
-            steps {
-                sh 'dotnet test'
-            }
+            // steps {
+            //     sh 'dotnet test'
+            // }
         }
 
         // stage('DotNet Test') {
@@ -36,12 +36,12 @@ pipeline {
                 }
             }
             steps {
-                sh 'cd DotnetTemplate.Web && npm init -y && npm install && npm run build'
+                sh 'cd DotnetTemplate.Web && npm init -y && npm install && npm run build && npm t && npm run lint'
             }
             // NPM Tests 
-            steps {
-                sh 'cd DotnetTemplate.Web && npm t && npm run lint'
-            }
+            // steps {
+            //     sh 'cd DotnetTemplate.Web && npm t && npm run lint'
+            // }
         }
 
         // stage('NPM Test') {
