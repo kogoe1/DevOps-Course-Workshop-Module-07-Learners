@@ -7,3 +7,25 @@ jobs:
     runs-on: ubuntu-latest      # Sets the build environment a machine with the latest Ubuntu installed
     steps:
     - uses: actions/checkout@v2 # Adds a step to checkout the repository code
+
+    - name: Hello world       # Name of step
+      run: echo 'Hello world' # Command to run
+
+    - name: Build App
+      run: dotnet build
+    
+    - name: 
+      uses: kogoe1/DevOps-Course-Workshop-Module-07-Learners
+      run: 
+        working-directory: DotnetTemplate.Web
+        npm install
+        npm run build 
+     
+    - name: Tests
+      uses: kogoe1/DevOps-Course-Workshop-Module-07-Learners
+      run: dotnet test
+      run:
+        working-directory: DotnetTemplate.Web
+        npm t
+        npm run lint
+
