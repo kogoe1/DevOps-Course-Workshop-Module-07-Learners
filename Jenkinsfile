@@ -6,7 +6,7 @@ pipeline {
     }
 
     stages {
-        stage(' DotNet Build') {
+        stage(' DotNet Build and Test') {
             agent {
                 docker { 
                     image 'mcr.microsoft.com/dotnet/sdk:5.0'
@@ -16,15 +16,19 @@ pipeline {
             steps {
                 sh 'dotnet build'
             }
-        }
-
-        stage('DotNet Test') {
+            // DotNet Test
             steps {
-                sh 'pwd && dotnet test'
+                sh 'dotnet test'
             }
         }
 
-        stage('NPM Build') {
+        // stage('DotNet Test') {
+        //     steps {
+        //         sh 'pwd && dotnet test'
+        //     }
+        // }
+
+        stage('NPM Build and Tests') {
             agent {
                 docker { 
                     image 'node:14-alpine' 
@@ -34,16 +38,20 @@ pipeline {
             steps {
                 sh 'cd DotnetTemplate.Web && npm init -y && npm install && npm run build'
             }
-        }
-
-        stage('NPM Test') {
-            // agent {
-            //     docker { image 'node:14-alpine' }
-            // }
+            // NPM Tests 
             steps {
                 sh 'cd DotnetTemplate.Web && npm t && npm run lint'
             }
         }
+
+        // stage('NPM Test') {
+        //     // agent {
+        //     //     docker { image 'node:14-alpine' }
+        //     // }
+        //     steps {
+        //         sh 'cd DotnetTemplate.Web && npm t && npm run lint'
+        //     }
+        // }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
