@@ -18,14 +18,12 @@ jobs:
       uses: kogoe1/DevOps-Course-Workshop-Module-07-Learners
       run: 
         working-directory: DotnetTemplate.Web
-        npm install
-        npm run build 
+        npm install; npm run build 
      
     - name: Tests
       uses: kogoe1/DevOps-Course-Workshop-Module-07-Learners
       run: dotnet test
       run:
         working-directory: DotnetTemplate.Web
-        npm t
-        npm run lint
+        npm t; npm run lint
 
