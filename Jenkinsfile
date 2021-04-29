@@ -1,21 +1,34 @@
 pipeline {
-    agent any
+    agent none
 
     stages {
-        stage('Build') {
+        stage(' DotNet Build') {
+            agent {
+                docker { image 'mcr.microsoft.com/dotnet/sdk:5.0' }
+            }
             steps {
-                bat 'dotnet build'
-                bat 'npm install'
-                bat 'npm run build'
+                sh 'dotnet build'
             }
         }
-        stage('Test') {
+
+        stage('NPM Build') {
+            agent {
+                docker { image 'node:14-alpine' }
+            }
             steps {
-                bat 'cd DotnetTemplate.Web.Tests'
-                bat 'dotnet test'
-                bat 'cd DotnetTemplate.Web'
-                bat 'npm t'
-                bat 'npm run lint'
+                sh 'npm install'
+                sh 'npm run build'
+            }
+        }
+        stage('DotNet Test') {
+            steps {
+                sh 'dotnet test'
+            }
+        }
+
+        stage('NPM Test') {
+            steps {
+                sh 'cd DotnetTemplate.Web && npm t && npm run lint'
             }
         }
         stage('Deploy') {
