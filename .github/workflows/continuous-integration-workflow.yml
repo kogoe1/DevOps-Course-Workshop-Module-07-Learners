@@ -21,10 +21,12 @@ jobs:
         npm install
         npm run build 
      
-    # - name: Tests
-    #   uses: kogoe1/DevOps-Course-Workshop-Module-07-Learners
-    #   run: dotnet test
-    #   run:
-    #     working-directory: DotnetTemplate.Web
-    #     npm t; npm run lint
+    - name: Run Tests
+      run: dotnet test
+
+    - name: Run linter and typscript tests
+      working-directory: DotnetTemplate.Web
+      run:
+        npm t
+        npm run lint
 
