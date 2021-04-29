@@ -20,7 +20,7 @@ pipeline {
                 docker { image 'node:14-alpine' }
             }
             steps {
-                sh 'npm init && npm install && npm run build'
+                sh ' touch package.json && npm install && npm run build'
             }
         }
         stage('DotNet Test') {
