@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sh 'dotnet build'
             }
-            // DotNet Test
+            
             steps {
                 sh 'dotnet test'
             }
