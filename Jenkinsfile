@@ -20,7 +20,7 @@ pipeline {
                 docker { image 'node:14-alpine' }
             }
             steps {
-                sh 'npm init -y && npm install && npm run build'
+                sh 'cd DotnetTemplate.Web && npm init -y && npm install && npm run build'
             }
         }
         stage('DotNet Test') {
